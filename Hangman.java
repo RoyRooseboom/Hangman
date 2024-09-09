@@ -17,33 +17,30 @@ public class Hangman
     static ArrayList<Character> charactersFromCorrectWord = new ArrayList<Character>();
     static String[] words = {"HELLO", "CAR", "BOOK", "RENTALUNIT", "PARLEMENT"};
 
-    static boolean continueGame = true;
+    static GetPlayerInput playerInput = new GetPlayerInput();
+    static ShowOutput output = new ShowOutput();
 
     public static void main(String[] args)
     {
-        int randomWord = new Random().nextInt(5);
+        int randomWord = new Random().nextInt(words.length);
         String correctWord = words[randomWord];
 
 
-        GetPlayerInput playerInput = new GetPlayerInput();
-        ShowOutput output = new ShowOutput();
-
-        while (continueGame) 
+        
+        
+        for(int i = 0; i < timesYouCanTry; i++)
         {
-            for(int i = 0; i < timesYouCanTry; i++)
-            {
-                CheckAwnser(correctWord, playerInput.GetInput(correctWord));
+            CheckAwnser(correctWord, playerInput.GetInput(correctWord));
 
-                System.out.println("\033[H\033[2J");
-                // System.out.flush();
+            System.out.println("\033[H\033[2J");
+            // System.out.flush();
 
-                System.out.println("Guessed: " + lettersGuessed);
-                System.out.println("Wrong: " + wrongLetters);
-                System.out.println("Correct: " + correctLetters);
-                System.out.println("Word: " + correctWord);
+            System.out.println("Guessed: " + lettersGuessed);
+            System.out.println("Wrong: " + wrongLetters);
+            System.out.println("Correct: " + correctLetters);
+            System.out.println("Word: " + correctWord);
 
-            }        
-        }
+        }      
     }
 
     private static void CheckAwnser(String word, String letters)
@@ -73,7 +70,7 @@ public class Hangman
 
         // This works, however the "flushing of the screen" removes this.
         // we have to end the game here.
-        if(charactersFromCorrectWord.containsAll(correctLetters)) continueGame = false;
+        if(correctLetters.containsAll(charactersFromCorrectWord)) EndGame();
 
         // If they typed to full word
         if(letters.equals(word)) EndGame();        
@@ -81,7 +78,9 @@ public class Hangman
 
     private static void EndGame()
     {
+        output.Output();
         System.out.println("Inside End Game");
+        System.exit(0);
     }
 
 }

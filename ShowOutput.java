@@ -5,27 +5,35 @@ public class ShowOutput
         System.out.println("\033[H\033[2J");
         System.out.flush();
 
-        YourGuess(playerInput);
-        ShowWrongLetters(wrongLetters);
-        ShowAwnser(awnser);
+        YourGuess();
+        ShowWrongLetters();
+        ShowCorrectLetters();
+        ShowAwnser();
     }
 
-    private void YourGuess(String input)
+    private void YourGuess(Object[] guessed)
     {
-        System.out.println(input);
+        System.out.println("You Guessed: " + guessed);
     }
 
     private void ShowWrongLetters(Object[] wrongLetters)
     {
         for(Object letters : wrongLetters)
         {
-            System.out.println(letters);
+            System.out.println("Wrong Letters: " + wrongLetters);
+        }
+    }
+
+    private void ShowCorrectLetters(Object[] correctLetters)
+    {
+        for(Object letters : correctLetters)
+        {
+            System.out.println("Wrong Letters: " + correctLetters);
         }
     }
 
     private void ShowAwnser(String awnser)
     {
-        String correctAwnser = awnser;
-        System.out.println();
+        System.out.println("The awnser is: " + awnser);
     }
 }
