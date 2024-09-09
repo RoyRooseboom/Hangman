@@ -30,15 +30,17 @@ public class Hangman
         
         for(int i = 0; i < timesYouCanTry; i++)
         {
+            System.out.print("Please input a letter: ");
             CheckAwnser(correctWord, playerInput.GetInput(correctWord));
 
             System.out.println("\033[H\033[2J");
             // System.out.flush();
+            output.Output(lettersGuessed, wrongLetters, correctLetters);
 
-            System.out.println("Guessed: " + lettersGuessed);
-            System.out.println("Wrong: " + wrongLetters);
-            System.out.println("Correct: " + correctLetters);
-            System.out.println("Word: " + correctWord);
+            // System.out.println("Guessed: " + lettersGuessed);
+            // System.out.println("Wrong: " + wrongLetters);
+            // System.out.println("Correct: " + correctLetters);
+            // System.out.println("Word: " + correctWord);
 
         }      
     }
@@ -70,16 +72,15 @@ public class Hangman
 
         // This works, however the "flushing of the screen" removes this.
         // we have to end the game here.
-        if(correctLetters.containsAll(charactersFromCorrectWord)) EndGame();
+        if(correctLetters.containsAll(charactersFromCorrectWord)) EndGame(word);
 
         // If they typed to full word
-        if(letters.equals(word)) EndGame();        
+        if(letters.equals(word)) EndGame(word);        
     }
 
-    private static void EndGame()
+    private static void EndGame(String word)
     {
-        output.Output();
-        System.out.println("Inside End Game");
+        output.Win(word);
         System.exit(0);
     }
 
