@@ -3,12 +3,6 @@ import java.util.Random;
 
 public class Hangman
 {
-    /*
-    *  You guessed: A
-    *  Wrong Letters: A, T, Q
-    *  Awnser: D _ G
-    */
-
     static int timesYouCanTry = 15;
 
     static ArrayList<Character> lettersGuessed = new ArrayList<Character>();
@@ -20,28 +14,21 @@ public class Hangman
     static GetPlayerInput playerInput = new GetPlayerInput();
     static ShowOutput output = new ShowOutput();
 
+    static String correctWord;
+
     public static void main(String[] args)
     {
         int randomWord = new Random().nextInt(words.length);
-        String correctWord = words[randomWord];
+        correctWord = words[randomWord];
 
-
-        
-        
-        for(int i = 0; i < timesYouCanTry; i++)
+        for(int i = 0; i < timesYouCanTry; timesYouCanTry--)
         {
+            System.out.println("You have " + timesYouCanTry + " guesses left.");
             System.out.print("Please input a letter: ");
             CheckAwnser(correctWord, playerInput.GetInput(correctWord));
 
             System.out.println("\033[H\033[2J");
-            // System.out.flush();
-            output.Output(lettersGuessed, wrongLetters, correctLetters);
-
-            // System.out.println("Guessed: " + lettersGuessed);
-            // System.out.println("Wrong: " + wrongLetters);
-            // System.out.println("Correct: " + correctLetters);
-            // System.out.println("Word: " + correctWord);
-
+            output.Output();
         }      
     }
 
@@ -70,11 +57,8 @@ public class Hangman
             }
         }
 
-        // This works, however the "flushing of the screen" removes this.
-        // we have to end the game here.
         if(correctLetters.containsAll(charactersFromCorrectWord)) EndGame(word);
 
-        // If they typed to full word
         if(letters.equals(word)) EndGame(word);        
     }
 
