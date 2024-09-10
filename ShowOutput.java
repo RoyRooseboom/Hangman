@@ -1,37 +1,46 @@
-import java.util.ArrayList;
-
 public class ShowOutput
 {
-    public void Output(ArrayList<Character> guesses, ArrayList<Character> wrongLetters, ArrayList<Character> correctLetters)
+    public void Output()
     {
         System.out.println("\033[H\033[2J");
         System.out.flush();
 
-        YourGuess(guesses);
-        ShowWrongLetters(wrongLetters);
-        ShowCorrectLetters(correctLetters);
+        YourGuess();
+        ShowWrongLetters();
+        ShowCorrectLetters();
         ShowAwnser();
+        System.out.println();
+        System.out.println();
     }
 
-    private void YourGuess(ArrayList<Character> guessed)
+    private void YourGuess()
     {
-        System.out.println("You Guessed: " + guessed);
+        System.out.println("You Guessed: " + Hangman.lettersGuessed);
     }
 
-    private void ShowWrongLetters(ArrayList<Character> wrongLetters)
+    private void ShowWrongLetters()
     {
-        System.out.println("Wrong Letters: " + wrongLetters);
+        System.out.println("Wrong Letters: " + Hangman.wrongLetters);
     }
 
-    private void ShowCorrectLetters(ArrayList<Character> correctLetters)
+    private void ShowCorrectLetters()
     {
-        System.out.println("Correct Letters: " + correctLetters);
+        System.out.println("Correct Letters: " + Hangman.correctLetters);
     }
 
     private void ShowAwnser()
     {
-        // Spell out the word here, each round. In the following way:
-        // B _ _ K
+        char[] correctWordArray = Hangman.correctWord.toCharArray();
+
+        for(int i = 0; i < correctWordArray.length; i++)
+        {
+            if(!Hangman.correctLetters.contains(correctWordArray[i]))
+            {
+                correctWordArray[i] = '_';
+            }
+
+            System.out.print(correctWordArray[i] + " ");
+        }
     }
 
     public void Win(String awnser)
