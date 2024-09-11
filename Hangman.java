@@ -9,7 +9,7 @@ public class Hangman
     static ArrayList<Character> wrongLetters = new ArrayList<Character>();
     static ArrayList<Character> correctLetters = new ArrayList<Character>();
     static ArrayList<Character> charactersFromCorrectWord = new ArrayList<Character>();
-    static String[] words = {"HELLO", "CAR", "BOOK", "RENTALUNIT", "PARLEMENT"};
+    static String[] words = {"HELLO", "CAR", "BOOK", "RENTAL UNIT", "PARLEMENT"};
 
     static GetPlayerInput playerInput = new GetPlayerInput();
     static ShowOutput output = new ShowOutput();
@@ -21,7 +21,12 @@ public class Hangman
         int randomWord = new Random().nextInt(words.length);
         correctWord = words[randomWord];
 
-        for(int i = 0; i < timesYouCanTry; timesYouCanTry--)
+        for(char let : correctWord.toCharArray())
+        {
+            charactersFromCorrectWord.add(let);
+        }
+
+        while(timesYouCanTry > 0)
         {
             System.out.println("You have " + timesYouCanTry + " guesses left.");
             System.out.print("Please input a letter: ");
@@ -29,31 +34,32 @@ public class Hangman
 
             System.out.println("\033[H\033[2J");
             output.Output();
-        }      
+
+            timesYouCanTry--;
+        }
+
+        System.out.println("Out of tries...");
     }
 
     private static void CheckAwnser(String word, String letters)
     {
-        charactersFromCorrectWord.removeAll(charactersFromCorrectWord);
+        char[] lettersArray = letters.toCharArray();
 
-        for(char l : word.toCharArray())
+        for(int i = 0; i < letters.length(); i++)
         {
-            charactersFromCorrectWord.add(l);
-        }
-
-        for(char c : letters.toCharArray())
-        {
-            if(!lettersGuessed.contains(c))
+            if(!lettersGuessed.contains(lettersArray[i]))
             {
-                lettersGuessed.add(c);
+                lettersGuessed.add(lettersArray[i]);
             }
 
-            if(word.contains(letters))
+            char target = lettersArray[i];
+
+            if(charactersFromCorrectWord.contains(target))
             {
-                if(!correctLetters.contains(letters.charAt(0))) correctLetters.add(c);
+                if(!correctLetters.contains(target)) correctLetters.add(target);
             } else
             {
-                if(!wrongLetters.contains(letters.charAt(0))) wrongLetters.add(c);
+                if(!wrongLetters.contains(target)) wrongLetters.add(target);
             }
         }
 
