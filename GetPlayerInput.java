@@ -20,7 +20,7 @@ public class GetPlayerInput
         }
         else 
         {
-            return Character.toString(value.charAt(0));
+            return value.replaceAll("[\\d\\W]+", "");
         }
     }
 }
