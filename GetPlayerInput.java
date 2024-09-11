@@ -10,8 +10,13 @@ public class GetPlayerInput
 
         if(value.equals(correctWord)) return value;
 
-        if (value.matches("[A-Za-z]{1}")) {
+        if (value.matches("[A-Za-z]{1}")) 
+        {
             return value;
+        }
+        else if(value.matches("[\\d\\W]+") || value.isBlank()) 
+        {
+            return "";
         }
         else 
         {
