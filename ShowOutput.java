@@ -18,7 +18,7 @@ public class ShowOutput
 
         for(int i = 0; i < correctWordArray.length; i++)
         {
-            if(!Hangman.correctLetters.contains(correctWordArray[i]))
+            if(!Hangman.correctLetters.contains(correctWordArray[i]) && correctWordArray[i] != ' ')
             {
                 correctWordArray[i] = '_';
             }
