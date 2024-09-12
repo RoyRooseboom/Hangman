@@ -4,11 +4,11 @@ public class GetPlayerInput
 {
     Scanner input = new Scanner(System.in);
 
-    public String GetInput(String correctWord)
+    public String GetInput()
     {
         String value = input.nextLine().toUpperCase();
 
-        if(value.equals(correctWord)) return value;
+        if(value.equals(Hangman.correctWord)) return value;
 
         if (value.matches("[A-Za-z]{1}")) 
         {

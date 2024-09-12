@@ -9,7 +9,8 @@ public class Hangman
     static ArrayList<Character> wrongLetters = new ArrayList<Character>();
     static ArrayList<Character> correctLetters = new ArrayList<Character>();
     static ArrayList<Character> charactersFromCorrectWord = new ArrayList<Character>();
-    static String[] words = {"HELLO", "CAR", "BOOK", "RENTAL UNIT", "PARLEMENT"};
+    static String[] words = {"HELLO", "CAR", "BOOK", "RENTAL UNIT", "PARLEMENT", "AIRPORT", "ALARM CLOCK", "BOARD GAME", "BANANA", "BALLOON", "CATTLE", "CANCEL",
+                            "DINOSAUR", "DANGEROUS", "DEVELOPMENT", "EVENING", "EASTERN", "ENERGY", "EQUIPMENT", "FATHER", "FASHION"};
 
     static GetPlayerInput playerInput = new GetPlayerInput();
     static ShowOutput output = new ShowOutput();
@@ -30,15 +31,15 @@ public class Hangman
         {
             System.out.println("You have " + timesYouCanTry + " guesses left.");
             System.out.print("Please input a letter: ");
-            CheckAwnser(correctWord, playerInput.GetInput(correctWord));
+            CheckAwnser(correctWord, playerInput.GetInput());
 
-            System.out.println("\033[H\033[2J");
             output.Output();
 
             timesYouCanTry--;
         }
 
         System.out.println("Out of tries...");
+        System.out.println("The correct awnser was: " + correctWord);
     }
 
     private static void CheckAwnser(String word, String letters)
@@ -63,14 +64,13 @@ public class Hangman
             }
         }
 
-        if(correctLetters.containsAll(charactersFromCorrectWord)) EndGame(word);
-
-        if(letters.equals(word)) EndGame(word);        
+        if(correctLetters.containsAll(charactersFromCorrectWord) || letters.equals(word)) 
+            EndGame();
     }
 
-    private static void EndGame(String word)
+    private static void EndGame()
     {
-        output.Win(word);
+        output.Win();
         System.exit(0);
     }
 
