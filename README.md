@@ -1,7 +1,7 @@
 # Contents
 - [Hangman The Game](#hangman-the-game) 
 - [Why make Hangman?](#why-make-hangman)
-- [What i have learned](#what-are-some-things-i-have-learned-making-hangman)
+- [What i have learned](#what-i-have-learned)
 - [Things i ran into](#things-i-ran-into-when-making-this-game)
 
 ## Hangman The Game
